@@ -1,6 +1,7 @@
 <script lang="ts">
   import BgColor from './lib/BgColor.svelte'
   import StepList from './lib/StepList.svelte'
+  import Results from './lib/Results.svelte'
 </script>
 
 <main>
@@ -11,7 +12,7 @@
 
   <StepList/>
 
-  <div class="card">display result...</div>
+  <Results/>
 </main>
 
 <style>

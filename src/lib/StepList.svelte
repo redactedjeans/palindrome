@@ -1,6 +1,6 @@
 <script lang="ts">
   type Step = {
-    contrast: number;
+    contrast: number
   }
   enum ContrastType {
     WCAG = "wcag",

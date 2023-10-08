@@ -1,10 +1,18 @@
 declare module 'apcach'
 
+type ContrastConfig = {
+  contrastModel: string
+  cr: number
+  bgColor: string
+  fgColor: string
+  searchDirection: string
+}
+
 type Color = {
   colorSpace: string // FIXME
-  alpha: number
   lightness: number
   chroma: number
   hue: number
-  contrastConfig: Object // FIXME
+  alpha: number
+  contrastConfig: contrastConfig
 }

@@ -1,10 +1,13 @@
 import { apcach, crToBg, maxChroma } from "apcach";
+import type { Step } from './types/step'
 
 self.addEventListener('message', (e: MessageEvent) => {
-  const color: Color = [...Array(360)].reduce((min, _, hue) => {
-    const col = apcach(crToBg(e.data.bg, e.data.cr), maxChroma(), hue)
-    return (!min || col.chroma < min.chroma) ? col : min
-  })
+  if (e.data.crs.length === 0) return
 
-  self.postMessage(color)
+  const colors: Array<Color> = e.data.crs.map((cr: Step) => [...Array(360)].reduce((min, _, hue) => {
+    const col = apcach(crToBg(e.data.bg, cr.contrast), maxChroma(), hue)
+    return (!min || col.chroma < min.chroma) ? col : min
+  }))
+
+  self.postMessage(colors)
 })

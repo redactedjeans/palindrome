@@ -2,11 +2,20 @@
   import BgColor from './lib/BgColor.svelte'
   import StepList from './lib/StepList.svelte'
   import Results from './lib/Results.svelte'
+
+  import { bg, steps } from './store'
 </script>
 
 <main>
   <h1>Palindrome</h1>
   <div class="sub">Colour Palette Generator</div>
+
+  <div class="card">
+    <h2>Store Data</h2>
+
+    <div>{$bg}</div>
+    <div>{JSON.stringify($steps)}</div>
+  </div>
 
   <BgColor/>
 

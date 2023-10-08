@@ -1,22 +1,38 @@
 <script lang="ts">
   import ApcachWorker from '../worker.js?worker'
+  import { data } from '../store'
 
-  let color: Color|null = null
-  const worker = new ApcachWorker()
-  worker.postMessage({ bg: '#fff', cr: 70 })
+  let colors: Array<Color> = []
+  let worker: Worker = new ApcachWorker()
+
   worker.addEventListener('message', (e: MessageEvent) => {
-    color = e.data as Color
+    colors = e.data as Array<Color>
+  })
+  data.subscribe(() => {
+    if ($data.steps.length > 0) {
+      colors = []
+      worker.postMessage({ bg: $data.bg, crs: $data.steps })
+    }
   })
 </script>
 
 <div class="card">
-  {#if color}
-    <div>Lightness: {color.lightness}</div>
-    <div>Chroma: {color.chroma}</div>
-    <div>Hue: {color.hue}</div>
+  <h2>Smallest Maximum Chroma</h2>
+
+  {#each colors as color}
+    <div class="grp">
+      <h3>Target Contrast: {color.contrastConfig.cr}</h3>
+      <div>Lightness: {color.lightness}</div>
+      <div>Chroma: {color.chroma}</div>
+      <div>Hue: {color.hue}</div>
+    </div>
   {:else}
-    <div class="spinner"></div>
-  {/if}
+    {#if $data.steps.length === 0}
+      <div class="info">You have not entered any contrast targets.</div>
+    {:else}
+      <div class="spinner"></div>
+    {/if}
+  {/each}
 </div>
 
 <style>
@@ -27,6 +43,10 @@
     border-left-color: transparent;
     border-radius: 50%;
     animation: spin 1s linear infinite;
+  }
+  .info {
+    color: #555;
+    font-style: italic;
   }
 
   @keyframes spin {

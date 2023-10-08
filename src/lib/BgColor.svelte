@@ -1,17 +1,19 @@
 <script lang="ts">
   import { cssToApcach, apcachToCss } from "apcach"
+  import { bg } from "../store"
 
-  let color: string = "#000"
   // FIXME: can I use any background color for this conversion?
-  $: oklch = apcachToCss(cssToApcach(color, {bg: '#fff'}), "oklch")
+  $: oklch = apcachToCss(cssToApcach($bg, {bg: '#fff'}), "oklch")
+
+  const updateBg = (e: Event) => { bg.set((e.target as HTMLInputElement).value) }
 </script>
 
 <div class="card">
   <h2>Background Colour</h2>
 
-  <input type="color" class="grp" bind:value={color}>
+  <input type="color" class="grp" value={$bg} on:change={updateBg}>
 
-  <div>{color}</div>
+  <div>{$bg}</div>
   <div>pretty sure this is at least somewhat wrong: {oklch}</div>
 </div>
 

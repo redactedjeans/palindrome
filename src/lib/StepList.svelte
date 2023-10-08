@@ -3,18 +3,20 @@
     contrast: number;
   }
   enum ContrastType {
-    WCAG = 1,
-    BridgePCA,
-    APCA,
+    WCAG = "wcag",
+    BridgePCA = "bridgepca",
+    APCA = "apca",
   }
 
   let crType: ContrastType = ContrastType.APCA
   let steps: Array<Step> = []
   let newCr: number|null = null
 
+  // TODO: validation (0-108)
   const addStep = () => {
     steps.push({ contrast: newCr ?? 0 })
     steps = steps
+    newCr = null
   }
 </script>
 
@@ -38,6 +40,7 @@
         name="crType"
         value={ContrastType.BridgePCA}
         bind:group={crType}
+        disabled
       />
     </label>
     <label>

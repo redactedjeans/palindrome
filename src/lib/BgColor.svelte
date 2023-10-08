@@ -1,5 +1,9 @@
 <script lang="ts">
+  import { cssToApcach, apcachToCss } from "apcach"
+
   let color: string = "#000"
+  // FIXME: can I use any background color for this conversion?
+  $: oklch = apcachToCss(cssToApcach(color, {bg: '#fff'}), "oklch")
 </script>
 
 <div class="card">
@@ -8,7 +12,7 @@
   <input type="color" class="grp" bind:value={color}>
 
   <div>{color}</div>
-  <div>{color}</div>
+  <div>pretty sure this is at least somewhat wrong: {oklch}</div>
 </div>
 
 <style>

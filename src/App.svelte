@@ -21,6 +21,7 @@
     padding: 3rem 0;
   }
   .sub {
+    text-transform: uppercase;
     margin-bottom: 2rem;
   }
 

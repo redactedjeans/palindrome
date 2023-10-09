@@ -5,34 +5,44 @@
   import { apcach, crToBg } from "apcach";
   import { steps, hues } from '../store'
 
-  let colors: Array<Color> = []
-  let worker: Worker = new ApcachWorker()
+  const _createApcachWorker = () => {
+    const worker = new ApcachWorker()
+    worker.addEventListener('message', (e: MessageEvent) => {
+      colors = e.data as Array<Color>
+    })
+    return worker
+  }
+  const getOklch = (step: Step, hue: Hue, index: number) => {  
+    const apca = apcach(
+      crToBg(step.antagonist, step.contrast),
+      colors[index].chroma,
+      hue.value
+    )
+    return `oklch(${apca.lightness} ${apca.chroma} ${apca.hue})`
+  }
 
+  let colors: Array<Color> = []
+  let worker: Worker = _createApcachWorker()
+
+  // I don't love this but currently to avoid weird race conditions
+  // and the minmaxchroma calculation taking forever
+  // we just kill the worker on update and create a new one
   steps.subscribe(() => {
+    if (colors.length === 0) {
+      worker.terminate()
+      worker = _createApcachWorker()
+    }
     if ($steps.length > 0) {
       colors = []
       worker.postMessage({ crs: $steps })
     }
   })
-  worker.addEventListener('message', (e: MessageEvent) => {
-    colors = e.data as Array<Color>
-  })
-
-  const getOklch = (step: Step, hue: Hue, index: number) => {
-    const apca = apcach(
-      crToBg(step.antagonist, step.contrast),
-      colors[index]?.chroma ?? 0,
-      hue.value
-    )
-
-    return `oklch(${apca.lightness} ${apca.chroma} ${apca.hue})`
-  }
 </script>
 
 <div class="card">
   <div class="title">
     <h2>Palette</h2>
-    {#if $steps.length > 0 && $hues.length > 0 && colors.length === 0}
+    {#if colors.length === 0 && $steps.length > 0}
       <div class="spinner"></div>
     {/if}
   </div>

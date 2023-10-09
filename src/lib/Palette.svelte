@@ -103,7 +103,8 @@
   }
   .row {
     display: flex;
-    gap: .8rem;
+    flex-wrap: wrap;
+    gap: .6rem;
   }
   .row:not(:last-child) {
     margin-bottom: 1.2rem;

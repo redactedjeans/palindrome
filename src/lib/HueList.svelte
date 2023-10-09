@@ -12,7 +12,7 @@
   const updateName = (e: Event, index: number, hue: Hue) => {
     hue.name = (e.target as HTMLInputElement).value
     updateHue(index, hue)
-  }
+}
   const updateValue = (e: Event, index: number, hue: Hue) => {
     hue.value = parseInt((e.target as HTMLInputElement).value)
     updateHue(index, hue)
@@ -32,7 +32,7 @@
     {#each $hues as hue, i}
       <input
         value={hue.name}
-        on:change={(e) => updateName(e, i, hue)}
+        on:change={e => updateName(e, i, hue)}
       />
       <input
         type="number" min="0" max="360"

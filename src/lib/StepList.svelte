@@ -40,17 +40,17 @@
       <input
         type="number" min="0" max="1000"
         value={step.numbering}
-        on:change={(e) => updateNumbering(e, i, step)}
+        on:change={e => updateNumbering(e, i, step)}
     />
       <input
         type="number" min="0" max="108"
         value={step.contrast}
-        on:change={(e) => updateContrast(e, i, step)}
+        on:change={e => updateContrast(e, i, step)}
       />
       <input
         type="color"
         value={step.antagonist}
-        on:change={(e) => updateAntagonist(e, i, step)}
+        on:change={e => updateAntagonist(e, i, step)}
       />
       <div class="locked">
         <span>Auto</span>

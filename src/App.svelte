@@ -29,5 +29,6 @@
   .sub {
     text-transform: uppercase;
     margin-bottom: 2rem;
+    font-weight: bold;
   }
 </style>

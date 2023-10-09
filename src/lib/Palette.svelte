@@ -12,13 +12,13 @@
     })
     return worker
   }
-  const getOklch = (step: Step, hue: Hue, index: number) => {  
+  const getOklch = (step: Step, hue: Hue, index: number) => {
     const apca = apcach(
       crToBg(step.antagonist, step.contrast),
       colors[index].chroma,
       hue.value
     )
-    return `oklch(${apca.lightness} ${apca.chroma} ${apca.hue})`
+    return { l: apca.lightness, c: apca.chroma, h: apca.hue }
   }
 
   let colors: Array<Color> = []
@@ -48,18 +48,28 @@
   </div>
 
   {#if $steps.length === 0}
-    <div class="info">You have not entered any steps.</div>
+    <div class="body info">You have not entered any steps.</div>
   {:else if $hues.length === 0}
-    <div class="info">You have not entered any hues.</div>
+    <div class="body info">You have not entered any hues.</div>
   {:else if colors.length > 0}
-    {#each $hues as hue}
-      <div class="label">{hue.name}</div>
-      <div class="row">
-        {#each $steps as step, i}
-          <div class="swatch" style="--color: {getOklch(step, hue, i)}"></div>
-        {/each}
-      </div>
-    {/each}
+    <div class="body">
+      {#each $hues as hue}
+        <div class="label">{hue.name}</div>
+        <div class="row">
+          {#each $steps as step, i}
+            {@const oklch = getOklch(step, hue, i)}
+            <div class="swatch"
+              style:--bg="oklch({oklch.l} {oklch.c} {oklch.h})"
+              style:--fg={step.antagonist}
+            >
+              <div>{Math.round(oklch.l * 1000) / 10}</div>
+              <div>{Math.round(oklch.c * 1000) / 1000}</div>
+              <div>{oklch.h}</div>
+            </div>
+          {/each}
+        </div>
+      {/each}
+    </div>
   {/if}
 </div>
 
@@ -72,9 +82,6 @@
   h2 {
     margin: 0;
   }
-  .title:not(:has(.spinner)) {
-    margin-bottom: 2rem;
-  }
   .spinner {
     height: 1em;
     width: 1em;
@@ -86,6 +93,9 @@
   .info {
     color: #555;
     font-style: italic;
+  }
+  .body {
+    margin-top: 2rem;
   }
   .label {
     font-weight: bold;
@@ -102,7 +112,13 @@
     height: 3rem;
     width: 3rem;
     border-radius: 8px;
-    background-color: var(--color);
+    background-color: var(--bg);
+    color: var(--fg);
+  }
+  .swatch > div {
+    font-size: 1rem;
+    line-height: 1rem;
+    text-align: center;
   }
 
   @keyframes spin {

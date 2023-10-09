@@ -12,15 +12,6 @@
     <div class="sub">Colour Palette Generator</div>
   </div>
 
-  <div class="card" style="overflow-x: scroll">
-<pre>[{#each $steps as step}
-  {JSON.stringify(step)},{/each}
-]</pre>
-<pre>[{#each $hues as hue}
-  {JSON.stringify(hue)},{/each}
-]</pre>
-  </div>
-
   <StepList/>
 
   <HueList/>

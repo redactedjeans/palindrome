@@ -1,7 +1,7 @@
 <script lang="ts">
   import StepList from './lib/StepList.svelte'
   import HueList from './lib/HueList.svelte'
-  import Results from './lib/Results.svelte'
+  import Palette from './lib/Palette.svelte'
 
   import { steps, hues } from './store'
 </script>
@@ -12,11 +12,11 @@
     <div class="sub">Colour Palette Generator</div>
   </div>
 
-  <div class="card">
-    <pre>[{#each $steps as step}
+  <div class="card" style="overflow-x: scroll">
+<pre>[{#each $steps as step}
   {JSON.stringify(step)},{/each}
 ]</pre>
-    <pre>[{#each $hues as hue}
+<pre>[{#each $hues as hue}
   {JSON.stringify(hue)},{/each}
 ]</pre>
   </div>
@@ -25,7 +25,7 @@
 
   <HueList/>
 
-  <Results/>
+  <Palette/>
 </main>
 
 <style>

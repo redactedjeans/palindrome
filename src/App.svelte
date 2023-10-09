@@ -2,8 +2,6 @@
   import StepList from './lib/StepList.svelte'
   import HueList from './lib/HueList.svelte'
   import Palette from './lib/Palette.svelte'
-
-  import { steps, hues } from './store'
 </script>
 
 <main>

@@ -29,6 +29,42 @@ h3 {
   margin: 0 0 .5rem 0;
 }
 
+/* inputs & buttons */
+input, button {
+  border-radius: 6px;
+  padding: .8rem 1.2rem;
+}
+input {
+  border: 1px solid #E1E3F3;
+}
+input[type="color"] {
+  padding: 0;
+  width: 100%;
+}
+input[type="color"]::-moz-color-swatch,
+input[type="color"]::-webkit-color-swatch {
+  border: none;
+  border-radius: 6px;
+}
+button {
+  background-color: #E1E3F3;
+  border: none;
+}
+button:hover {
+  background-color: #ccd;
+}
+.card button {
+  width: 100%;
+}
+
+/* cards */
+.card {
+  background-color: #F1F2FD;
+  border-radius: 6px;
+  padding: 1.2em;
+}
+
+/* noscript (FIXME) */
 noscript {
   display: block;
   color: #822;

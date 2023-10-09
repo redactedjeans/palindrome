@@ -7,19 +7,19 @@
 </script>
 
 <main>
-  <h1>Palindrome</h1>
-  <div class="sub">Colour Palette Generator</div>
-
-  <div class="card">
-    <h2>Store Data</h2>
-
-    <div>{$bg}</div>
-    <div>{JSON.stringify($steps)}</div>
+  <div>
+    <h1>Palindrome</h1>
+    <div class="sub">Colour Palette Generator</div>
   </div>
 
-  <BgColor/>
+  <div class="card">
+    <code>{JSON.stringify($bg)}</code>
+    <code>{JSON.stringify($steps)}</code>
+  </div>
 
   <StepList/>
+
+  <BgColor/>
 
   <Results/>
 </main>
@@ -29,19 +29,12 @@
     max-width: 500px;
     margin: 0 auto;
     padding: 3rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
   }
   .sub {
     text-transform: uppercase;
     margin-bottom: 2rem;
-  }
-
-  :global(.card) {
-    background-color: #f1f2fe;
-    border-radius: 5px;
-    padding: 1.5rem;
-    margin: 1.5rem 0;
-  }
-  :global(.grp) {
-    margin-bottom: 1rem;
   }
 </style>

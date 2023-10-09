@@ -1,10 +1,7 @@
 type Step = {
+  numbering: number
   contrast: number
-}
-const enum ContrastType {
-  WCAG = "wcag",
-  BridgePCA = "bridgepca",
-  APCA = "apca",
+  antagonist: string
 }
 
-export { Step, ContrastType }
+export { Step }

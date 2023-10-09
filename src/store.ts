@@ -3,7 +3,7 @@ import type { Writable } from 'svelte/store'
 import type { Step } from './types/step'
 import type { Hue } from './types/hue'
 
-const steps: Writable<Array<Step>> = writable([])
-const hues: Writable<Array<Hue>> = writable([])
+const steps: Writable<Step[]> = writable([])
+const hues: Writable<Hue[]> = writable([])
 
 export { steps, hues }

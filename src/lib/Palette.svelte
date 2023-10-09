@@ -8,7 +8,7 @@
   const _createApcachWorker = () => {
     const worker = new ApcachWorker()
     worker.addEventListener('message', (e: MessageEvent) => {
-      colors = e.data as Array<Color>
+      colors = e.data as Color[]
     })
     return worker
   }
@@ -21,7 +21,7 @@
     return { l: apca.lightness, c: apca.chroma, h: apca.hue }
   }
 
-  let colors: Array<Color> = []
+  let colors: Color[] = []
   let worker: Worker = _createApcachWorker()
 
   // I don't love this but currently to avoid weird race conditions

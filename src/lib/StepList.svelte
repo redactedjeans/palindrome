@@ -8,7 +8,7 @@
     steps.update(s => (s.push({
       numbering: num,
       contrast: last ? last.contrast : 0,
-      antagonist: num <= 500 ? '#000000' : '#000000',
+      antagonist: num <= 500 ? '#000000' : '#ffffff',
     }), s))
   }
   const updateNumbering = (e: Event, index: number, step: Step) => {
@@ -34,7 +34,7 @@
   <div class="grid">
     <div class="header">Numbering</div>
     <div class="header">Contrast</div>
-    <div class="header">Background</div>
+    <div class="header">vs.</div>
     <div class="header">Chroma</div>
     {#each $steps as step, i}
       <input
@@ -57,7 +57,8 @@
         <span>🔒</span>
       </div>
     {/each}
-    </div>
+  </div>
+
   <button type="button" on:click={addStep}>Add Step</button>
 </div>
 
@@ -72,7 +73,7 @@
   .grid > * {
     min-width: 0;
   }
-  .header {
+  .grid .header {
     font-weight: bold;
   }
   .locked {

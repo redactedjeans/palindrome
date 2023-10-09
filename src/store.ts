@@ -1,18 +1,19 @@
 import { writable, derived } from "svelte/store"
 import type { Writable, Readable } from 'svelte/store'
 import type { Step } from './types/step'
+import type { Hue } from './types/hue'
 
 type DataStore = {
-  bg: string
   steps: Array<Step>
+  hues: Array<Hue>
 }
 
-const bg: Writable<string> = writable('#000000')
 const steps: Writable<Array<Step>> = writable([])
+const hues: Writable<Array<Hue>> = writable([])
 
 // derived store so we can subsribe to any changes across all stores
-const data: Readable<DataStore> = derived([bg, steps], ([$bg, $steps]) => {
-  return { bg: $bg, steps: $steps }
+const data: Readable<DataStore> = derived([steps, hues], ([$steps, $hues]) => {
+  return { steps: $steps, hues: $hues }
 })
 
-export { bg, steps, data }
+export { steps, hues, data }

@@ -1,9 +1,9 @@
 <script lang="ts">
-  import BgColor from './lib/BgColor.svelte'
   import StepList from './lib/StepList.svelte'
+  import HueList from './lib/HueList.svelte'
   import Results from './lib/Results.svelte'
 
-  import { bg, steps } from './store'
+  import { steps, hues } from './store'
 </script>
 
 <main>
@@ -13,13 +13,17 @@
   </div>
 
   <div class="card">
-    <code>{JSON.stringify($bg)}</code>
-    <code>{JSON.stringify($steps)}</code>
+    <pre>[{#each $steps as step}
+  {JSON.stringify(step)},{/each}
+]</pre>
+    <pre>[{#each $hues as hue}
+  {JSON.stringify(hue)},{/each}
+]</pre>
   </div>
 
   <StepList/>
 
-  <BgColor/>
+  <HueList/>
 
   <Results/>
 </main>

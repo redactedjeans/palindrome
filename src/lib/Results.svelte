@@ -11,7 +11,7 @@
   data.subscribe(() => {
     if ($data.steps.length > 0) {
       colors = []
-      worker.postMessage({ bg: $data.bg, crs: $data.steps })
+      worker.postMessage({ crs: $data.steps })
     }
   })
 </script>

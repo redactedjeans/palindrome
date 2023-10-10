@@ -17,3 +17,7 @@
 
 ## Bugs
 - contrast of 108 always returns black (even against white background)
+- a better way of interrupting the worker than killing it would be nice
+- the worker code it very very slow
+  - memoization would help, but can only be implemented if the worker isn't terminated on cancel
+  - for common cases, pre-calculating a big table for each (integer) contrast value against black/white

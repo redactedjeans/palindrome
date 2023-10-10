@@ -31,7 +31,7 @@
     <div class="header">Shift</div>
     {#each $hues as hue, i}
       <input
-        value={hue.name}
+        value={hue.name} placeholder={`${hue.value}`}
         on:change={e => updateName(e, i, hue)}
       />
       <input
@@ -50,6 +50,9 @@
 </div>
 
 <style>
+  .card {
+    grid-column: 1;
+  }
   .grid {
     justify-content: stretch; 
     display: grid;

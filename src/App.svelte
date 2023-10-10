@@ -4,31 +4,36 @@
   import Palette from './lib/Palette.svelte'
 </script>
 
+<div>
+  <h1>Palindrome</h1>
+  <div class="sub">Colour Palette Generator</div>
+</div>
 <main>
   <div>
-    <h1>Palindrome</h1>
-    <div class="sub">Colour Palette Generator</div>
+    <StepList/>
+
+    <HueList/>
   </div>
 
-  <StepList/>
-
-  <HueList/>
-
-  <Palette/>
+  <div>
+    <Palette/>
+  </div>
 </main>
 
 <style>
-  main {
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 3rem 0;
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-  }
   .sub {
     text-transform: uppercase;
     margin-bottom: 2rem;
-    font-weight: bold;
+    font-weight: 600;
+  }
+  main {
+    display: flex;
+    gap: 2.4rem;
+  }
+  main > div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
   }
 </style>

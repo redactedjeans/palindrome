@@ -63,6 +63,9 @@
 </div>
 
 <style>
+  .card {
+    grid-column: 1;
+  }
   .grid {
     justify-content: stretch; 
     display: grid;

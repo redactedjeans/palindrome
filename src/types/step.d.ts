@@ -3,6 +3,7 @@ type Step = {
   numbering: number
   contrast: number
   antagonist: string
+  chroma: number|null
 }
 
 export { Step }

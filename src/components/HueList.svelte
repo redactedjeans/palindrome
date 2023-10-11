@@ -23,8 +23,7 @@
     updateHue(index, hue)
   }
   const updateValue = (e: Event, index: number, hue: Hue) => {
-    const val: string = (e.target as HTMLInputElement).value
-    hue.value = parseInt(val === '' ? '0' : val)
+    hue.value = parseInt((e.target as HTMLInputElement).value || '0')
     updateHue(index, hue)
   }
   const updateHue = (index: number, hue: Hue) => {

@@ -11,6 +11,7 @@
         numbering: num,
         contrast: last ? last.contrast : 0,
         antagonist: num <= 500 ? '#000000' : '#ffffff',
+        chroma: null,
       }),
       ss.sort((a, b) => a.numbering - b.numbering),
       ss
@@ -21,17 +22,17 @@
     steps.update(ss => (ss.splice(i, 1), ss))
   }
   const updateNumbering = (e: Event, index: number, step: Step) => {
-    const val: string = (e.target as HTMLInputElement).value
-    step.numbering = parseInt(val === '' ? '0' : val)
+    step.numbering = parseInt((e.target as HTMLInputElement).value || '0')
     updateStep(index, step)
   }
   const updateContrast = (e: Event, index: number, step: Step) => {
-    const val: string = (e.target as HTMLInputElement).value
-    step.contrast = parseInt(val === '' ? '0' : val)
+    step.contrast = parseInt((e.target as HTMLInputElement).value || '0')
+    step.chroma = null
     updateStep(index, step)
   }
   const updateAntagonist = (e: Event, index: number, step: Step) => {
     step.antagonist = (e.target as HTMLInputElement).value
+    step.chroma = null
     updateStep(index, step)
   }
   const updateStep = (index: number, step: Step) => {
@@ -69,7 +70,10 @@
         on:change={e => updateAntagonist(e, i, step)}
       />
       <div class="locked">
-        <span>Auto</span>
+        <span>
+          Auto
+          {#if step.chroma !== null}&nbsp;({Math.floor(step.chroma * 1000) / 1000}){/if}
+        </span>
         <span>🔒</span>
       </div>
       <button type="button" class="del" on:click={_ => deleteStep(i)}>

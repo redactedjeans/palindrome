@@ -88,7 +88,7 @@
     text-align: center;
   }
   .palette {
-    font-family: IBM Plex Mono, monospace;
+    font-family: 'IBM Plex Mono', 'Courier New', Courier, monospace;
     display: flex;
     flex-direction: column;
     gap: .6rem;

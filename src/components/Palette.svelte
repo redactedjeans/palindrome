@@ -58,8 +58,8 @@
         {#each $steps as step, i (step.id)}
           {@const oklch = getOklch(step, hue, i)}
           <div class="swatch"
-            style:--bg="oklch({oklch.l} {oklch.c} {oklch.h})"
-            style:--fg={step.antagonist}
+            style:background="oklch({oklch.l} {oklch.c} {oklch.h})"
+            style:color={step.antagonist}
           >
             <div>{hue.name || `${hue.value}`.padStart(3, '0')}.{`${step.numbering}`.padStart(3, '0')}</div>
             <div>&nbsp;</div>
@@ -99,8 +99,6 @@
   }
   .swatch {
     border-radius: 8px;
-    background-color: var(--bg);
-    color: var(--fg);
     padding: 1.6rem .8rem;
     display: flex;
     flex-direction: column;

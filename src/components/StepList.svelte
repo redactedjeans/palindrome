@@ -71,8 +71,7 @@
       />
       <div class="locked">
         <span>
-          Auto
-          {#if step.chroma !== null}&nbsp;({Math.floor(step.chroma * 1000) / 1000}){/if}
+          Auto{#if step.chroma !== null}&nbsp;({Math.floor(step.chroma * 1000) / 1000}){/if}
         </span>
         <span>🔒</span>
       </div>

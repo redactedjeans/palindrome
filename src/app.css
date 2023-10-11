@@ -1,9 +1,15 @@
+/* variables */
+:root {
+  --sans: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --mono: 'IBM Plex Mono', 'Courier New', Courier, monospace;
+}
+
 /* default html element styling */
 * {
   box-sizing: border-box;
 }
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: var(--sans);
   font-size: 62.5%;
 }
 body {
@@ -37,6 +43,7 @@ input, button {
 }
 input {
   border: 1px solid #E1E3F3;
+  font-family: var(--mono);
 }
 input[type="color"] {
   padding: 0;
@@ -88,6 +95,7 @@ button.del:active {
 .locked {
   color: #8C8E9D;
   font-size: 1.3rem;
+  font-family: var(--mono);
   background-color: white;
   border: 1px solid #E1E3F3;
   border-radius: 6px;

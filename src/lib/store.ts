@@ -1,8 +1,6 @@
-import { writable, derived } from "svelte/store"
 import type { Readable, Writable } from 'svelte/store'
-import type { Step } from '../types/step'
-import type { Hue } from '../types/hue'
-import type { AppState } from '../types/appState'
+import type { Step, Hue, AppState } from '../types'
+import { writable, derived } from "svelte/store"
 
 // get initial state from local storage (if any)
 const init: AppState = JSON.parse(localStorage.getItem('app-state') ?? '{}')

@@ -6,4 +6,4 @@ type Step = {
   chroma: number|null
 }
 
-export { Step }
+export default Step

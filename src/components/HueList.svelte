@@ -1,6 +1,6 @@
 <script lang="ts">
+  import type { Hue } from '../types'
   import { hues } from '../lib/store'
-  import type { Hue } from '../types/hue'
 
   const addHue = () => {
     hues.update(hs => (

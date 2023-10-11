@@ -1,6 +1,6 @@
 <script lang="ts">
+  import type { Step } from '../types'
   import { steps } from '../lib/store'
-  import type { Step } from '../types/step'
 
   const addStep = () => {
     const last = $steps[$steps.length - 1]

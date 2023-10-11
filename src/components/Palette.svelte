@@ -1,7 +1,5 @@
 <script lang="ts">
-  import type { Step } from '../types/step'
-  import type { Hue } from '../types/hue'
-  import type { Chroma } from '../types/chroma'
+  import type { Step, Hue, Chroma } from '../types'
   import ApcachWorker from '../lib/worker?worker'
   import { apcach, crToBg, apcachToCss } from "apcach"
   import { steps, hues } from '../lib/store'

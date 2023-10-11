@@ -3,4 +3,4 @@ type Chroma = {
   value: number
 }
 
-export { Chroma }
+export default Chroma

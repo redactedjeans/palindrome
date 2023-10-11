@@ -5,4 +5,4 @@ type Hue = {
   shift: number
 }
 
-export { Hue }
+export default Hue

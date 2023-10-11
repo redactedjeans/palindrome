@@ -92,7 +92,7 @@
   .grid {
     justify-content: stretch; 
     display: grid;
-    grid-template-columns: repeat(5, auto);
+    grid-template-columns: 2fr 2fr auto 3fr auto;
     grid-gap: .8rem 1.2rem;
     margin-bottom: 2rem;
   }

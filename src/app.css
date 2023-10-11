@@ -41,6 +41,7 @@ input {
 input[type="color"] {
   padding: 0;
   width: 100%;
+  height: 100%;
 }
 input[type="color"]::-moz-color-swatch,
 input[type="color"]::-webkit-color-swatch {
@@ -54,6 +55,18 @@ button {
 button:hover {
   background-color: #ccd;
 }
+button:active {
+  background-color: #bbc;
+}
+button.del {
+  background-color: #FFDBE4;
+}
+button.del:hover {
+  background-color: #fbc;
+}
+button.del:active {
+  background-color: #e89;
+}
 .card button {
   width: 100%;
 }
@@ -63,6 +76,18 @@ button:hover {
   background-color: #F1F2FD;
   border-radius: 6px;
   padding: 1.2em;
+}
+
+/* fake inputs */
+.locked {
+  color: #8C8E9D;
+  font-size: 1.3rem;
+  background-color: white;
+  border: 1px solid #E1E3F3;
+  border-radius: 6px;
+  padding: .8rem 1.2rem;
+  display: flex;
+  justify-content: space-between;
 }
 
 /* noscript (FIXME) */

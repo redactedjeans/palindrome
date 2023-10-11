@@ -3,22 +3,26 @@
   import type { Hue } from '../types/hue'
 
   const addHue = () => {
-    hues.update(h => (h.push({
-      name: "",
+    hues.update(hs => (hs.push({
+      name: '',
       value: 0,
       shift: 0,
-    }), h))
+    }), hs))
+  }
+  const deleteHue = (i: number) => {
+    hues.update(hs => (hs.splice(i, 1), hs))
   }
   const updateName = (e: Event, index: number, hue: Hue) => {
     hue.name = (e.target as HTMLInputElement).value
     updateHue(index, hue)
-}
+  }
   const updateValue = (e: Event, index: number, hue: Hue) => {
-    hue.value = parseInt((e.target as HTMLInputElement).value)
+    const val: string = (e.target as HTMLInputElement).value
+    hue.value = parseInt(val === '' ? '0' : val)
     updateHue(index, hue)
   }
   const updateHue = (index: number, hue: Hue) => {
-    hues.update(h => (h[index] = hue, h))
+    hues.update(hs => (hs[index] = hue, hs))
   }
 </script>
 
@@ -29,13 +33,14 @@
     <div class="header">Name</div>
     <div class="header">Hue</div>
     <div class="header">Shift</div>
-    {#each $hues as hue, i}
+    <div class="header"><!-- delete button --></div>
+    {#each $hues.sort((a, b) => a.value - b.value) as hue, i}
       <input
-        value={hue.name} placeholder={`${hue.value}`}
+        value={hue.name} placeholder={`${hue.value}`.padStart(3, '0')}
         on:change={e => updateName(e, i, hue)}
       />
       <input
-        type="number" min="0" max="360"
+        type="number" min="000" max="360"
         value={hue.value}
         on:change={e => updateValue(e, i, hue)}
       />
@@ -43,6 +48,9 @@
         <span>{hue.shift}</span>
         <span>🔒</span>
       </div>
+      <button type="button" class="del" on:click={_ => deleteHue(i)}>
+        🗑️
+      </button>
     {/each}
   </div>
 
@@ -56,7 +64,7 @@
   .grid {
     justify-content: stretch; 
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, auto);
     grid-gap: .8rem 1.2rem;
     margin-bottom: 2rem;
   }
@@ -66,14 +74,7 @@
   .grid .header {
     font-weight: bold;
   }
-  .locked {
-    color: #8C8E9D;
-    font-size: 1.3rem;
-    background-color: white;
-    border: 1px solid #E1E3F3;
-    border-radius: 6px;
-    padding: .8rem 1.2rem;
-    display: flex;
-    justify-content: space-between;
+  .locked > span:last-child {
+    margin-left: 2em;
   }
 </style>

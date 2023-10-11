@@ -5,18 +5,23 @@
   const addStep = () => {
     const last = $steps[$steps.length - 1]
     const num = (last ? last.numbering : 0) + 50
-    steps.update(s => (s.push({
+    steps.update(ss => (ss.push({
       numbering: num,
       contrast: last ? last.contrast : 0,
       antagonist: num <= 500 ? '#000000' : '#ffffff',
-    }), s))
+    }), ss))
+  }
+  const deleteStep = (i: number) => {
+    steps.update(ss => (ss.splice(i, 1), ss))
   }
   const updateNumbering = (e: Event, index: number, step: Step) => {
-    step.numbering = parseInt((e.target as HTMLInputElement).value)
+    const val: string = (e.target as HTMLInputElement).value
+    step.numbering = parseInt(val === '' ? '0' : val)
     updateStep(index, step)
   }
   const updateContrast = (e: Event, index: number, step: Step) => {
-    step.contrast = parseInt((e.target as HTMLInputElement).value)
+    const val: string = (e.target as HTMLInputElement).value
+    step.contrast = parseInt(val === '' ? '0' : val)
     updateStep(index, step)
   }
   const updateAntagonist = (e: Event, index: number, step: Step) => {
@@ -24,7 +29,7 @@
     updateStep(index, step)
   }
   const updateStep = (index: number, step: Step) => {
-    steps.update(s => (s[index] = step, s))
+    steps.update(ss => (ss[index] = step, ss))
   }
 </script>
 
@@ -36,7 +41,8 @@
     <div class="header">Contrast</div>
     <div class="header">vs.</div>
     <div class="header">Chroma</div>
-    {#each $steps as step, i}
+    <div class="header"><!-- delete button --></div>
+    {#each $steps.sort((a, b) => a.numbering - b.numbering) as step, i}
       <input
         type="number" min="0" max="1000"
         value={step.numbering}
@@ -56,6 +62,9 @@
         <span>Auto</span>
         <span>🔒</span>
       </div>
+      <button type="button" class="del" on:click={_ => deleteStep(i)}>
+        🗑️
+      </button>
     {/each}
   </div>
 
@@ -69,24 +78,20 @@
   .grid {
     justify-content: stretch; 
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, auto);
     grid-gap: .8rem 1.2rem;
     margin-bottom: 2rem;
   }
   .grid > * {
     min-width: 0;
   }
+  .grid > input[type="color"] {
+    min-width: 2.5em;
+  }
   .grid .header {
     font-weight: bold;
   }
-  .locked {
-    color: #8C8E9D;
-    font-size: 1.3rem;
-    background-color: white;
-    border: 1px solid #E1E3F3;
-    border-radius: 6px;
-    padding: .8rem 1.2rem;
-    display: flex;
-    justify-content: space-between;
+  .locked > span:last-child {
+    margin-left: 1em;
   }
 </style>

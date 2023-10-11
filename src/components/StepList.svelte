@@ -6,6 +6,7 @@
     const last = $steps[$steps.length - 1]
     const num = (last ? last.numbering : 0) + 50
     steps.update(ss => (ss.push({
+      id: Math.max(...$steps.map(s => s.id), 0) + 1,
       numbering: num,
       contrast: last ? last.contrast : 0,
       antagonist: num <= 500 ? '#000000' : '#ffffff',
@@ -42,12 +43,12 @@
     <div class="header">vs.</div>
     <div class="header">Chroma</div>
     <div class="header"><!-- delete button --></div>
-    {#each $steps.sort((a, b) => a.numbering - b.numbering) as step, i (step.numbering)}
+    {#each $steps.sort((a, b) => a.numbering - b.numbering) as step, i (step.id)}
       <input
         type="number" min="0" max="1000"
         value={step.numbering}
         on:change={e => updateNumbering(e, i, step)}
-    />
+      />
       <input
         type="number" min="0" max="108"
         value={step.contrast}

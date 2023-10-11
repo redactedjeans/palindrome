@@ -4,6 +4,7 @@
 
   const addHue = () => {
     hues.update(hs => (hs.push({
+      id: Math.max(...$hues.map(h => h.id), 0) + 1,
       name: '',
       value: 0,
       shift: 0,
@@ -34,7 +35,7 @@
     <div class="header">Hue</div>
     <div class="header">Shift</div>
     <div class="header"><!-- delete button --></div>
-    {#each $hues.sort((a, b) => a.value - b.value) as hue, i (hue.name)}
+    {#each $hues.sort((a, b) => a.value - b.value) as hue, i (hue.id)}
       <input
         value={hue.name} placeholder={`${hue.value}`.padStart(3, '0')}
         on:change={e => updateName(e, i, hue)}

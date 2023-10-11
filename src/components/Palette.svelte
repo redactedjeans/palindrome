@@ -36,7 +36,6 @@
   // we just kill the worker on update and create a new one
   steps.subscribe(ss => {
     const missing = ss.filter(s => s.chroma === null)
-    // console.log(missing)
     if (missing.length > 0) {
       worker.terminate()
       worker = _createApcachWorker()

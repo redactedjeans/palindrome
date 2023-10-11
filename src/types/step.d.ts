@@ -1,5 +1,5 @@
 type Step = {
-  id: number,
+  id: number
   numbering: number
   contrast: number
   antagonist: string

@@ -1,7 +1,7 @@
 type Hue = {
-  id: number,
+  id: number
   name: string
-  value: number,
+  value: number
   shift: number
 }
 

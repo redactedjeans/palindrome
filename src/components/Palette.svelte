@@ -51,11 +51,11 @@
 {:else if !done}
   <div class="card info"><div class="spinner"></div></div>
 {:else}
-  {#each $hues as hue}
+  {#each $hues as hue (hue.id)}
     <div class="card">
       <h2>{hue.name || `${hue.value}`.padStart(3, '0')}</h2>
       <div class="palette">
-        {#each $steps as step, i}
+        {#each $steps as step, i (step.id)}
           {@const oklch = getOklch(step, hue, i)}
           <div class="swatch"
             style:--bg="oklch({oklch.l} {oklch.c} {oklch.h})"

@@ -1,8 +1,15 @@
 import type { Step, Chroma } from '../types'
-import getMinMaxChroma from './minMaxChroma'
+import { apcach, crToBg, maxChroma } from "apcach"
 import rawData from '../assets/chromas.json'
 
 const data = rawData as { [hex: string]: number[] }
+
+function getMinMaxChroma(step: Step): Color {
+  return [...Array(360)].reduce((min, _, hue) => {
+    const col = apcach(crToBg(step.antagonist, step.contrast), maxChroma(), hue)
+    return (!min || col.chroma < min.chroma) ? col : min
+  })
+}
 
 self.addEventListener('message', (e: MessageEvent) => {
   const chromas: Chroma[] = e.data.map((s: Step) => {

@@ -1,3 +1,13 @@
+import { apcach, crToBg, maxChroma } from "apcach"
+
+// this function is duplicated from the worker (src/lib/worker) because that is TypeScript
+// and this is JavaScript and I don't feel like figure all that out
+function getMinMaxChroma(step) {
+  return [...Array(360)].reduce((min, _, hue) => {
+    const col = apcach(crToBg(step.antagonist, step.contrast), maxChroma(), hue)
+    return (!min || col.chroma < min.chroma) ? col : min
+  })
+}
 
 const data = {}
 const bgs = ['#000000', '#ffffff']

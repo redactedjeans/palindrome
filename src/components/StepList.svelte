@@ -5,14 +5,19 @@
   const addStep = () => {
     const last = $steps[$steps.length - 1]
     const num = (last ? last.numbering : 0) + 50
-    steps.update(ss => (ss.push({
-      id: Math.max(...$steps.map(s => s.id), 0) + 1,
-      numbering: num,
-      contrast: last ? last.contrast : 0,
-      antagonist: num <= 500 ? '#000000' : '#ffffff',
-    }), ss))
+    steps.update(ss => (
+      ss.push({
+        id: Math.max(...$steps.map(s => s.id), 0) + 1,
+        numbering: num,
+        contrast: last ? last.contrast : 0,
+        antagonist: num <= 500 ? '#000000' : '#ffffff',
+      }),
+      ss.sort((a, b) => a.numbering - b.numbering),
+      ss
+    ))
   }
   const deleteStep = (i: number) => {
+    // no need to sort on deletion
     steps.update(ss => (ss.splice(i, 1), ss))
   }
   const updateNumbering = (e: Event, index: number, step: Step) => {
@@ -30,7 +35,11 @@
     updateStep(index, step)
   }
   const updateStep = (index: number, step: Step) => {
-    steps.update(ss => (ss[index] = step, ss))
+    steps.update(ss => (
+      ss[index] = step,
+      ss.sort((a, b) => a.numbering - b.numbering),
+      ss
+    ))
   }
 </script>
 
@@ -43,7 +52,7 @@
     <div class="header">vs.</div>
     <div class="header">Chroma</div>
     <div class="header"><!-- delete button --></div>
-    {#each $steps.sort((a, b) => a.numbering - b.numbering) as step, i (step.id)}
+    {#each $steps as step, i (step.id)}
       <input
         type="number" min="0" max="1000"
         value={step.numbering}

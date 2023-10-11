@@ -3,14 +3,19 @@
   import type { Hue } from '../types/hue'
 
   const addHue = () => {
-    hues.update(hs => (hs.push({
-      id: Math.max(...$hues.map(h => h.id), 0) + 1,
-      name: '',
-      value: 0,
-      shift: 0,
-    }), hs))
+    hues.update(hs => (
+      hs.push({
+        id: Math.max(...$hues.map(h => h.id), 0) + 1,
+        name: '',
+        value: 0,
+        shift: 0,
+      }),
+      hs.sort((a, b) => a.value - b.value),
+      hs
+    ))
   }
   const deleteHue = (i: number) => {
+    // no need to sort on deletion
     hues.update(hs => (hs.splice(i, 1), hs))
   }
   const updateName = (e: Event, index: number, hue: Hue) => {
@@ -23,7 +28,11 @@
     updateHue(index, hue)
   }
   const updateHue = (index: number, hue: Hue) => {
-    hues.update(hs => (hs[index] = hue, hs))
+    hues.update(hs => (
+      hs[index] = hue,
+      hs.sort((a, b) => a.value - b.value),
+      hs
+    ))
   }
 </script>
 
@@ -35,7 +44,7 @@
     <div class="header">Hue</div>
     <div class="header">Shift</div>
     <div class="header"><!-- delete button --></div>
-    {#each $hues.sort((a, b) => a.value - b.value) as hue, i (hue.id)}
+    {#each $hues as hue, i (hue.id)}
       <input
         value={hue.name} placeholder={`${hue.value}`.padStart(3, '0')}
         on:change={e => updateName(e, i, hue)}

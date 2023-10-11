@@ -42,7 +42,7 @@
     <div class="header">vs.</div>
     <div class="header">Chroma</div>
     <div class="header"><!-- delete button --></div>
-    {#each $steps.sort((a, b) => a.numbering - b.numbering) as step, i}
+    {#each $steps.sort((a, b) => a.numbering - b.numbering) as step, i (step.numbering)}
       <input
         type="number" min="0" max="1000"
         value={step.numbering}

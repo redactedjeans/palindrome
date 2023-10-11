@@ -34,7 +34,7 @@
     <div class="header">Hue</div>
     <div class="header">Shift</div>
     <div class="header"><!-- delete button --></div>
-    {#each $hues.sort((a, b) => a.value - b.value) as hue, i}
+    {#each $hues.sort((a, b) => a.value - b.value) as hue, i (hue.name)}
       <input
         value={hue.name} placeholder={`${hue.value}`.padStart(3, '0')}
         on:change={e => updateName(e, i, hue)}

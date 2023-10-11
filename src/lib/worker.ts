@@ -1,5 +1,5 @@
 import { apcach, crToBg, maxChroma } from "apcach";
-import type { Step } from './types/step'
+import type { Step } from '../types/step'
 
 function getMinMaxChroma(cr: Step): Color {
   return [...Array(360)].reduce((min, _, hue) => {

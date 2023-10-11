@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { steps } from '../store'
+  import { steps } from '../lib/store'
   import type { Step } from '../types/step'
 
   const addStep = () => {

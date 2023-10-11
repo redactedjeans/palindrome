@@ -1,7 +1,7 @@
 <script lang="ts">
-  import StepList from './lib/StepList.svelte'
-  import HueList from './lib/HueList.svelte'
-  import Palette from './lib/Palette.svelte'
+  import StepList from './components/StepList.svelte'
+  import HueList from './components/HueList.svelte'
+  import Palette from './components/Palette.svelte'
 </script>
 
 <div>

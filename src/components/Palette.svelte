@@ -1,9 +1,9 @@
 <script lang="ts">
   import type { Step } from '../types/step';
   import type { Hue } from '../types/hue';
-  import ApcachWorker from '../worker.js?worker'
+  import ApcachWorker from '../lib/worker?worker'
   import { apcach, crToBg, apcachToCss } from "apcach";
-  import { steps, hues } from '../store'
+  import { steps, hues } from '../lib/store'
 
   const _createApcachWorker = () => {
     const worker = new ApcachWorker()

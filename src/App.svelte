@@ -36,4 +36,11 @@
     flex-direction: column;
     gap: 1.2rem;
   }
+
+  /* mobile styles */
+  @media (max-width: 1000px) {
+    main {
+      flex-direction: column;
+    }
+  }
 </style>
